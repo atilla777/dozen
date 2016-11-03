@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103140310) do
+ActiveRecord::Schema.define(version: 20161103153020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,5 +44,17 @@ ActiveRecord::Schema.define(version: 20161103140310) do
     t.datetime "updated_at",                          null: false
   end
 
+  create_table "words", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "dictionary_id"
+    t.string   "translation"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["dictionary_id"], name: "index_words_on_dictionary_id", using: :btree
+    t.index ["name"], name: "index_words_on_name", using: :btree
+    t.index ["translation"], name: "index_words_on_translation", using: :btree
+  end
+
   add_foreign_key "dictionaries", "users"
+  add_foreign_key "words", "dictionaries"
 end

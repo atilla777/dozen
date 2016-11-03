@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @word.name
+p
+  strong Dictionary:
+  = @word.dictionary
+p
+  strong Translation:
+  = @word.translation
+
+= link_to 'Edit', edit_word_path(@word)
+'|
+= link_to 'Back', words_path

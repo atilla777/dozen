@@ -1,0 +1,23 @@
+  = form_for @word do |f|
+    - if @word.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@word.errors.count, "error")} prohibited this word from being saved:"
+        ul
+          - @word.errors.full_messages.each do |message|
+            li = message
+
+    .field
+      = f.label :name, class: 'w3-text-blue'
+      = f.text_field :name, class: 'w3-input'
+
+    .field
+      = f.label :dictionary, class: 'w3-text-blue'
+      = f.text_field :dictionary_id, class: 'w3-input'
+
+    .field
+      = f.label :translation, class: 'w3-text-blue'
+      = f.text_field :translation, class: 'w3-input'
+    .actions
+      = link_to '< Back', words_path, class: 'w3-btn w3-blue'
+      =< f.submit 'Create >', class: 'w3-btn w3-blue'
+
