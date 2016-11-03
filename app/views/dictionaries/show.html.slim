@@ -1,0 +1,11 @@
+.w3-card-4
+  .w3-container.w3-blue
+    h2
+      strong Dictionary - #{@dictionary.name}
+      = link_to edit_dictionary_path(@dictionary), class: 'w3-right-align w3-right w3-large w3-text-white w3-btn w3-hover-yellow w3-blue' do
+        i.fa.fa-pencil
+  .w3-container
+    p#notice = notice
+    - @words = Word.where(dictionary_id: @dictionary.id)
+    ul.w3-ul
+      = render partial: 'words/index'
