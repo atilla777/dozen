@@ -1,0 +1,24 @@
+.w3-card-4 style='margin-left:25%;margin-right:25%'
+  .w3-panel.w3-text-red
+    - flash.each do |key, value|
+      = content_tag :div, value, class:  "alert alert-#{key}"
+  .w3-padding
+    = form_for @user_session do |f|
+      span
+        i.fa.fa-user
+        =< 'email'
+        = f.email_field :email, class: 'w3-input w3-border', placeholder: 'email'
+      br
+      span
+        i.fa.fa-lock
+        =< t('user_sessions.password')
+        = f.password_field :password, class: 'w3-input w3-border', placeholder: t('user_sessions.password')
+
+      .actions
+        br
+        br
+        = f.submit t('user_sessions.login'), class: 'w3-btn-block w3-blue w3-text-white w3-border w3-xlarge'
+        br
+        br
+        br
+        = link_to t('user_sessions.register'), new_user_path, class: 'w3-btn-block w3-white w3-border w3-xlarge'

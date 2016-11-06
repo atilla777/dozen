@@ -6,8 +6,19 @@
         - @user.errors.full_messages.each do |message|
           li = message
   .form-group
-     = f.label :email, class: 'col-sm-2 control-label'
-     .col-sm-10
-       = f.text_field :email, class: 'form-control', placeholder: 'email'
-
-  .actions = f.submit
+    = f.label :email, class: 'w3-text-blue'
+    = f.text_field :email, class: 'w3-input', placeholder: 'email'
+  .form-group
+    = f.label :firstname, class: 'w3-text-blue'
+    = f.text_field :firstname, class: 'w3-input', placeholder: 'Firstname'
+  .form-group
+    = f.label :lastname, class: 'w3-text-blue'
+    = f.text_field :lastname, class: 'w3-input', placeholder: 'Lastname'
+  .form-group
+    = f.label :password, class: 'w3-text-blue'
+    = f.password_field :password, class: 'w3-input', placeholder: 'пароль (от 6 символов)'
+  .form-group
+    = f.label :password, class: 'w3-text-blue'
+    = f.password_field :password_confirmation, class: 'w3-input', placeholder: 'подтвердить пароль'
+  br
+  .actions = f.submit 'Create >', class: 'w3-btn w3-blue'

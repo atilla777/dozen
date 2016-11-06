@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_filter :authenticate?, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    render layout: 'unregistered'
   end
 
   # GET /users/1/edit
@@ -28,13 +30,25 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        UserMailer.confirm_email(@user).deliver
+        format.html { redirect_to @user, notice: 'Please check new mail to finish registration.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def confirm_email
+    user = User.where(email: params[:email]).first
+    if user.present?
+      if user.ingle_access_token == prams[:token]
+        user.register
+        redirect_to new_user_session_path
+      end
+    end
+    redirect_to new_user_session_path
   end
 
   # PATCH/PUT /users/1
@@ -70,5 +84,6 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.fetch(:user, {})
+      params.require(:user).permit(:email, :firstname, :lastname, :password, :password_confirmation)
     end
 end

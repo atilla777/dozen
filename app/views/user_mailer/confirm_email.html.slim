@@ -1,0 +1,8 @@
+h2
+  | Welcome to Dozen
+  =< @user.show_name
+p
+  | You have successfully signed up to Dozen, your username is:
+  = @user.email
+  | To activate your acount, just follow this link:
+  = confirm_email_url(@token, host: 'http://localhost:3000/' )
