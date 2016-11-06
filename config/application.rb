@@ -15,5 +15,9 @@ module Dozen
     # ++
     # Russian local by default
     config.i18n.default_locale = :ru
+
+    #++
+    #Delayued Job for email send
+    config.active_job.queue_adapter = :delayed_job
   end
 end

@@ -1,15 +1,14 @@
 class DictionariesController < ApplicationController
-  before_action :set_dictionary, only: [:show, :edit, :update, :destroy]
-
   # GET /dictionaries
   # GET /dictionaries.json
   def index
-    @dictionaries = Dictionary.all
+    @dictionaries = Dictionary.where(user_id: current_user.id).all
   end
 
   # GET /dictionaries/1
   # GET /dictionaries/1.json
   def show
+    @dictionary = set_dictionary
   end
 
   # GET /dictionaries/new
@@ -19,6 +18,7 @@ class DictionariesController < ApplicationController
 
   # GET /dictionaries/1/edit
   def edit
+    @dictionary = set_dictionary
   end
 
   # POST /dictionaries
@@ -28,7 +28,7 @@ class DictionariesController < ApplicationController
 
     respond_to do |format|
       if @dictionary.save
-        format.html { redirect_to @dictionary, notice: 'Dictionary was successfully created.' }
+        format.html { redirect_to dictionaries_path, notice: 'Dictionary was successfully created.' }
         format.json { render :show, status: :created, location: @dictionary }
       else
         format.html { render :new }
@@ -40,7 +40,8 @@ class DictionariesController < ApplicationController
   # PATCH/PUT /dictionaries/1
   # PATCH/PUT /dictionaries/1.json
   def update
-    respond_to do |format|
+    @dictionary = set_dictionary
+      respond_to do |format|
       if @dictionary.update(dictionary_params)
         format.html { redirect_to @dictionary, notice: 'Dictionary was successfully updated.' }
         format.json { render :show, status: :ok, location: @dictionary }
@@ -54,6 +55,7 @@ class DictionariesController < ApplicationController
   # DELETE /dictionaries/1
   # DELETE /dictionaries/1.json
   def destroy
+    @dictionary = set_dictionary
     @dictionary.destroy
     respond_to do |format|
       format.html { redirect_to dictionaries_url, notice: 'Dictionary was successfully destroyed.' }

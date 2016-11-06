@@ -53,3 +53,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'slim-rails'
 gem 'authlogic', '>= 3.5.0'
 gem 'font-awesome-rails'
+gem 'delayed_job_active_record'

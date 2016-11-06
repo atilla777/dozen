@@ -22,9 +22,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :firstname, length: {maximum: 255}
   validates :lastname, length: {maximum: 255}
-  #validates :email, format: /\A.+@.+\..+\z/i
 
-  has_many :dictionaries
+  has_many :dictionaries, dependent: :destroy
 
   def show_name
     if firstname.present? || lastname.present?

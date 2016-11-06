@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        UserMailer.confirm_email(@user).deliver
+        UserMailer.confirm_email(@user).deliver_later
         flash[:success] = 'Please check new mail to finish registration.'
         format.html { redirect_to @user }
         format.json { render :show, status: :created, location: @user }

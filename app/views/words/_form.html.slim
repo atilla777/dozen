@@ -9,15 +9,12 @@
     .field
       = f.label :name, class: 'w3-text-blue'
       = f.text_field :name, class: 'w3-input'
-
-    .field
-      = f.label :dictionary, class: 'w3-text-blue'
-      = f.text_field :dictionary_id, class: 'w3-input'
+      = f.hidden_field :dictionary_id, value: @dictionary.id
 
     .field
       = f.label :translation, class: 'w3-text-blue'
       = f.text_field :translation, class: 'w3-input'
     .actions
       = link_to '< Back', words_path, class: 'w3-btn w3-blue'
-      =< f.submit 'Create >', class: 'w3-btn w3-blue'
+      =< f.submit 'Save >', class: 'w3-btn w3-blue'
 

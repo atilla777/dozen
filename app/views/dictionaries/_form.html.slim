@@ -10,13 +10,10 @@
     b
       = f.label :name, class: 'w3-text-blue'
     = f.text_field :name, class: 'w3-input'
-  .field
-    b
-      = f.label :user, class: 'w3-text-blue'
-    = f.text_field :user, class: 'w3-input'
+    = f.hidden_field :user_id, value: current_user.id
   .actions
     - if @dictionary.new_record?
       = link_to '< Back', dictionaries_path, class: 'w3-btn w3-blue'
     - else
       = link_to '< Back', @dictionary, class: 'w3-btn w3-blue'
-    =< f.submit 'Create >', class: 'w3-btn w3-blue'
+    =< f.submit 'Save >', class: 'w3-btn w3-blue'

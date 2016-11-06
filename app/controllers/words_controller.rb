@@ -1,34 +1,39 @@
 class WordsController < ApplicationController
-  before_action :set_word, only: [:show, :edit, :update, :destroy]
-
   # GET /words
   # GET /words.json
   def index
-    @words = Word.all
+    dic_ids = Dictionary.where(user_id: current_user.id).pluck(:id)
+    @words = Word.all.where(dictionary_id: dic_ids)
   end
 
   # GET /words/1
   # GET /words/1.json
   def show
+    @word = set_word
+    @dictionary = @word.dictionary
   end
 
   # GET /words/new
   def new
+    @dictionary = Dictionary.where(id: params[:dictionary_id]).first
     @word = Word.new
   end
 
   # GET /words/1/edit
   def edit
+    @word = set_word
+    @dictionary = @word.dictionary
   end
 
   # POST /words
   # POST /words.json
   def create
     @word = Word.new(word_params)
+    @dictionary = @word.dictionary
 
     respond_to do |format|
       if @word.save
-        format.html { redirect_to @word, notice: 'Word was successfully created.' }
+        format.html { redirect_to @dictionary, notice: 'Word was successfully created.' }
         format.json { render :show, status: :created, location: @word }
       else
         format.html { render :new }
@@ -40,6 +45,8 @@ class WordsController < ApplicationController
   # PATCH/PUT /words/1
   # PATCH/PUT /words/1.json
   def update
+    @word = set_word
+    @dictionary = @word.dictionary
     respond_to do |format|
       if @word.update(word_params)
         format.html { redirect_to @word, notice: 'Word was successfully updated.' }
@@ -54,9 +61,11 @@ class WordsController < ApplicationController
   # DELETE /words/1
   # DELETE /words/1.json
   def destroy
+    @word = set_word
+    dictionary = @word.dictionary
     @word.destroy
     respond_to do |format|
-      format.html { redirect_to words_url, notice: 'Word was successfully destroyed.' }
+      format.html { redirect_to dictionary, notice: 'Word was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

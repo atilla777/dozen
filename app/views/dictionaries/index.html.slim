@@ -5,6 +5,7 @@
         strong.w3-text-white style='width:95%' Listing dictionaries
         = link_to new_dictionary_path, class: 'w3-right-align w3-right w3-large w3-text-white w3-btn w3-hover-green w3-blue', style: 'width:5%' do
           i.fa.fa-plus
+    p#notice = notice
     - @dictionaries.each do |dictionary|
       li.w3-btn-group
         = link_to dictionary.name, dictionary, class: 'w3-left-align w3-xlarge w3-btn w3-white w3-text-blue', style: 'width:95%'

@@ -2,6 +2,9 @@
   .w3-container.w3-blue
     h2
       strong Dictionary - #{@dictionary.name}
+      = link_to new_word_path(dictionary_id: @dictionary.id), class: 'w3-right-align w3-right w3-large w3-text-white w3-btn w3-hover-green w3-blue', style: 'width:5%' do
+            i.fa.fa-plus
+            i.fa.fa-file-text-o
       = link_to edit_dictionary_path(@dictionary), class: 'w3-right-align w3-right w3-large w3-text-white w3-btn w3-hover-yellow w3-blue' do
         i.fa.fa-pencil
   .w3-container
