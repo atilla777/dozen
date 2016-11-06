@@ -95,4 +95,5 @@ Rails.application.configure do
     user_name: ENV["GMAIL_USERNAME"],
     password: ENV["GMAIL_PASSWORD"]
   }
+  Rails.application.routes.default_url_options[:host] = ENV['URL']
   end

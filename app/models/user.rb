@@ -2,6 +2,7 @@ class User < ApplicationRecord
   acts_as_authentic do |c|
     #c.login_field = :email
     c.crypto_provider = Authlogic::CryptoProviders::Sha512
+    c.perishable_token_valid_for = 10.minutes
     c.validates_format_of_email_field_options = {:with => Authlogic::Regex.email_nonascii}
     c.merge_validates_format_of_email_field_options message: 'should to be an email address format'
     c.merge_validates_uniqueness_of_email_field_options# if: :active
@@ -33,10 +34,7 @@ class User < ApplicationRecord
     end
   end
 
-  def register
-    self.active = true
-    self.confirmed = true
-    self.approved = true
+  def activate!
     self.update(active: true, confirmed: true, approved: true)
   end
 end

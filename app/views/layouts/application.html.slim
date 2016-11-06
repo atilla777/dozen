@@ -15,9 +15,6 @@ javascript:
     = link_to '#', onclick: "w3_close()", class: 'w3-jumbo' do
       i.fa.fa-close
       =< 'Close'
-    = link_to users_path, class: 'w3-jumbo'  do
-      i.fa.fa-users
-      =< 'Users'
     = link_to dictionaries_path, class: 'w3-jumbo'  do
       i.fa.fa-book
       =< 'Dictionaries'
@@ -38,10 +35,6 @@ ul.w3-navbar.w3-blue.w3-xlarge.w3-hide-small.w3-hide-medium.w3-card-4
       i.fa.fa-mortar-board
       | Dozen |
   li.w3-left
-    = link_to users_path, class: 'w3-text-white white w3-hover-white w3-hover-text-black' do
-      i.fa.fa-users
-      =< 'Users'
-  li.w3-left
     = link_to dictionaries_path, class: 'w3-text-white w3-hover-white w3-hover-text-black' do
       i.fa.fa-book
       =< 'Dictionaries'
@@ -50,7 +43,7 @@ ul.w3-navbar.w3-blue.w3-xlarge.w3-hide-small.w3-hide-medium.w3-card-4
       i.fa.fa-book
       =< 'Words'
   li.w3-right
-    = link_to users_path, class: 'w3-text-white w3-hover-white w3-hover-text-black' do
+    = link_to sign_out_path, method: :delete, class: 'w3-text-white w3-hover-white w3-hover-text-black' do
       i.fa.fa-sign-out
       =< 'Logout'
   li.w3-right

@@ -8,12 +8,10 @@ class UserSessionsController < ApplicationController
 
   def create
     @user_session = UserSession.new(user_session_params)
-    #byebug
     if @user_session.save
       flash[:success] = t('user_sessions.welcome')
       redirect_to root_path
     else
-      #byebug
       flash[:danger] = t('user_sessions.wrong')
       render :new, layout: 'unregistered'
     end

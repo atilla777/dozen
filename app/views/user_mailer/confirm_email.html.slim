@@ -5,4 +5,4 @@ p
   | You have successfully signed up to Dozen, your username is:
   = @user.email
   | To activate your acount, just follow this link:
-  = confirm_email_url(@token, host: 'http://localhost:3000/' )
+  = confirm_email_url(@token)

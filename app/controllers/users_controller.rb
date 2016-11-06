@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :authenticate?, only: [:new, :create]
+  skip_before_action :authenticate?, only: [:confirm_email, :new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -31,7 +31,8 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         UserMailer.confirm_email(@user).deliver
-        format.html { redirect_to @user, notice: 'Please check new mail to finish registration.' }
+        flash[:success] = 'Please check new mail to finish registration.'
+        format.html { redirect_to @user }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -41,14 +42,15 @@ class UsersController < ApplicationController
   end
 
   def confirm_email
-    user = User.where(email: params[:email]).first
+    user = User.find_using_perishable_token(params[:token])
     if user.present?
-      if user.ingle_access_token == prams[:token]
-        user.register
-        redirect_to new_user_session_path
-      end
+      user.reset_perishable_token!
+      user.activate!
+      flash[:success] = 'You confirm email, login please.'
+    else
+      flash[:danger] = 'You don`t confirm email, try again please.'
     end
-    redirect_to new_user_session_path
+    redirect_to sign_in_path
   end
 
   # PATCH/PUT /users/1

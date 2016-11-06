@@ -1,7 +1,7 @@
 .w3-card-4 style='margin-left:25%;margin-right:25%'
-  .w3-panel.w3-text-red
+  .w3-panel
     - flash.each do |key, value|
-      = content_tag :div, value, class:  "alert alert-#{key}"
+      = content_tag :span, value, class:  "w3-text-#{key == 'danger' ? 'red' : 'green'}"
   .w3-padding
     = form_for @user_session do |f|
       span

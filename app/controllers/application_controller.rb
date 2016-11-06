@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
     def authenticate?
       unless current_user
-        redirect_to new_user_session_path
+        redirect_to sign_in_path
       end
     end
 
