@@ -1,12 +1,16 @@
 .w3-card-4
-  .w3-container.w3-blue
-    h2
-      strong
-        = @word.name
-        = link_to edit_word_path(@word), class: 'w3-right-align w3-right w3-large w3-text-white w3-btn w3-hover-yellow w3-blue' do
-          i.fa.fa-pencil
-    | Dictionary - #{@dictionary.name}
   .w3-container
-    p#notice = notice
+    h2
+      strong.w3-text-blue
+        = @word.name
+        = link_to edit_word_path(@word), class: 'w3-right-align w3-right w3-large w3-text-blue w3-btn w3-hover-yellow w3-white' do
+          i.fa.fa-pencil
+
+        = link_to @word, data: {:confirm => 'Are you sure?'},
+          :method => :delete, class: 'w3-right-align w3-right w3-large w3-text-blue w3-btn w3-white w3-hover-red' do
+          i.fa.fa-times
+      i.w3-small
+        =< "(Dictionary - #{@dictionary.name})"
+  .w3-container
     b.w3-text-black.w3-xlarge
       => @word.translation

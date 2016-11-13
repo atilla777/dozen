@@ -1,11 +1,8 @@
 - @words.each do |word|
-  li.w3-btn-group
-    = link_to word, class: 'w3-left-align w3-xlarge w3-btn w3-white w3-text-blue', style: 'width:95%' do
+  li
+    = link_to word, class: 'w3-left-align w3-xlarge w3-btn-block w3-white w3-text-blue' do
       span
         => word.name
         i.w3-text-black
           '-
           => word.translation
-    = link_to word, data: {:confirm => 'Are you sure?'},
-      :method => :delete, class: 'w3-right-align w3-large w3-text-red w3-btn w3-hover-red w3-white', style: 'width:5%' do
-      i.fa.fa-times

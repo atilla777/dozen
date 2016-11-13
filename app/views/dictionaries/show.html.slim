@@ -1,14 +1,16 @@
 .w3-card-4
-  .w3-container.w3-blue
+  .w3-container
     h2
-      strong Dictionary - #{@dictionary.name}
-      = link_to new_word_path(dictionary_id: @dictionary.id), class: 'w3-right-align w3-right w3-large w3-text-white w3-btn w3-hover-green w3-blue', style: 'width:5%' do
+      strong.w3-text-blue Dictionary - #{@dictionary.name}
+      = link_to new_word_path(dictionary_id: @dictionary.id), class: 'w3-right-align w3-right w3-large w3-text-blue w3-btn w3-hover-green w3-white' do
             i.fa.fa-plus
             i.fa.fa-file-text-o
-      = link_to edit_dictionary_path(@dictionary), class: 'w3-right-align w3-right w3-large w3-text-white w3-btn w3-hover-yellow w3-blue' do
+      = link_to edit_dictionary_path(@dictionary), class: 'w3-right-align w3-right w3-large w3-text-blue w3-btn w3-hover-yellow w3-white' do
         i.fa.fa-pencil
+      = link_to @dictionary, data: {:confirm => 'Are you sure?'},
+        :method => :delete, class: 'w3-right-align w3-right w3-large w3-text-blue w3-btn w3-hover-green w3-white' do
+        i.fa.fa-times
   .w3-container
-    p#notice = notice
     - @words = Word.where(dictionary_id: @dictionary.id)
     ul.w3-ul
       = render partial: 'words/index'
